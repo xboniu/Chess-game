@@ -1,7 +1,7 @@
 # Hi!
 ## This is my "bigger" project in Python, hope u like it.
 ### Description
-The project is contained in one .py file which, when exexuted, starts a game of chess in a terminal.
+The project is contained in one .py file which, when exexuted, starts a game of chess in the terminal.
 
 The printed board looks like that:
 ```
