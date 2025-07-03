@@ -5,6 +5,8 @@ def c(piece, colour):
     else:
         return piece.lower()
 
+            
+
 def create_piece(piece, position):
     x, y = converter(position)
     if piece == ' ':
@@ -731,8 +733,6 @@ def is_mate():
                 continue
             elif which_colour(board[i][j]) == o_c(whose_move):
                 if game[i][j].possible_move():
-                    print(i, j)
-                    print(game[i][j].possible_move())
                     return False
     return True
 # check if stalemate
@@ -744,7 +744,6 @@ def stalemate():
             if board[i][j] == ' ':
                 continue
             elif which_colour(board[i][j]) == o_c(whose_move):
-                print(game[i][j])
                 if game[i][j].possible_move():
                     return False
     return True
