@@ -868,30 +868,3 @@ while end != True:
         print('------------------- -')
         end = True
     whose_move = o_c(whose_move)
-'''
-
-# checking smth
-
-board = []
-for i in range(8):
-    t = []
-    for j in range(8):
-        t.append(' ')
-    board.append(t)
-game = copy_list(board)
-can_black_castle_k = False
-can_black_castle_q = False
-can_white_castle_k = False
-can_white_castle_q = False
-create_piece('K', 'c3')
-#create_piece('R', 'b2')
-create_piece('k', 'a1')
-create_piece('B', 'd8')
-#create_piece('R', 'a2')
-print(draw())
-'''
-# smth wrong with the possible_move function for the king
-
-# rewrite possible_move for the Rook and the Bishop
-
-# smth wrong with is_mate(), maybe because of the above
