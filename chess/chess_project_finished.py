@@ -605,12 +605,12 @@ class Pawn:
         if self.colour == 'white':
             if self.y>0 and board[self.x-1][self.y-1]!=' ' and board[self.x-1][self.y-1].islower():
                 return True
-            elif self.y>0 and board[self.x][self.y-1]=='p' and prev == [(self.x+2, self.y-1), (self.x, self.y-1)]:
+            elif self.y>0 and board[self.x][self.y-1]=='p' and self.x == 3 and prev == [(1, self.y-1), (3, self.y-1)]:
                 return True
         elif self.colour == 'black':
             if self.y>0 and board[self.x+1][self.y-1]!=' ' and board[self.x+1][self.y-1].isupper():
                 return True
-            elif self.y>0 and board[self.x][self.y-1]=='P' and prev == [(self.x-2, self.y-1), (self.x, self.y-1)]:
+            elif self.y>0 and board[self.x][self.y-1]=='P' and self.x == 4 and prev == [(6, self.y-1), (4, self.y-1)]:
                 return True
         return False
     # with en passant
@@ -618,12 +618,12 @@ class Pawn:
         if self.colour == 'white':
             if self.y<7 and board[self.x-1][self.y+1]!=' ' and board[self.x-1][self.y+1].islower():
                 return True
-            elif self.y>0 and board[self.x][self.y+1]=='p' and prev == [(self.x+2, self.y+1), (self.x, self.y+1)]:
+            elif self.y>0 and board[self.x][self.y+1]=='p' and self.x == 3 and prev == [(1, self.y+1), (3, self.y+1)]:
                 return True
         elif self.colour == 'black':
             if self.y<7 and board[self.x+1][self.y+1]!=' ' and board[self.x+1][self.y+1].isupper():
                 return True
-            elif self.y>0 and board[self.x][self.y+1]=='P' and prev == [(self.x-2, self.y+1), (self.x, self.y+1)]:
+            elif self.y>0 and board[self.x][self.y+1]=='P' and self.x == 4 and prev == [(6, self.y+1), (4, self.y+1)]:
                 return True
         return False
     # Main move function
@@ -660,6 +660,9 @@ class Pawn:
     
     def move(self, x, y):
         if self.can_move_p(x, y):
+            if self.y != y and board[x][y] == ' ':
+                board[self.x][y] = ' '
+                game[self.x][y] = ' '
             board[self.x][self.y] = ' '
             game[self.x][self.y] = ' '
             if x==0 or x==7:
@@ -811,12 +814,12 @@ while end != True:
     print(f'Player {whose_move} to move\n')
     action = (input('From which square do you want to move?\n'), input('To which square do you want to move\n'))
     try:
-        prev = [converter(action[0]), converter(action[1])]
+        choice = [converter(action[0]), converter(action[1])]
     except:
         print('Enter existing squares.')
         continue
-    where_from = prev[0]
-    where_to = prev[1]
+    where_from = choice[0]
+    where_to = choice[1]
     piece = board[where_from[0]][where_from[1]]
     if piece == ' ':
         print('There\'s no piece on the square you entered.')
@@ -834,6 +837,7 @@ while end != True:
     # Now doing the move after which the board and the game get updated
     action = game[where_from[0]][where_from[1]].move(where_to[0], where_to[1])
     if action:
+        prev = choice
         if whose_move == 'white':
             occupied_by_white.remove((where_from[0], where_from[1]))
             occupied_by_white.append((where_to[0], where_to[1]))
@@ -867,3 +871,4 @@ while end != True:
         print('------------------- -')
         end = True
     whose_move = o_c(whose_move)
+
